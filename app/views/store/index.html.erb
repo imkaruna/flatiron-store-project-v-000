@@ -1,7 +1,35 @@
-<% @categories.each do |category| %>
-  <%= link_to category.title, category_path(category) %>
-<% end %>
+
+<div class="row">
+    <div class="col-sm-3">
+
+      <h4>Pick a category</h4>
+      <% @categories.each do |category| %>
+         <li><%= link_to category.title, category_path(category) %></li>
+      <% end %>
+
+    </div>
+    <div class="col-sm-8">
+
+
+<h1>Available Items</h1>
 
 <% @items.each do |item| %>
-  <p><%= item.title %> | <%= number_to_currency(item.price) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
+<div class="col-sm-5">
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <strong>Price</strong> <%= number_to_currency(item.price/100) %>
+    </div>
+    <div class="panel-body"><h5><%= item.title %> </h5>  <% if user_signed_in? %>
+      <%= button_to 'Add to Cart', line_items_path(item_id: item), class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="col-sm-1">
+
+</div>
 <% end %>
+</div>
+
+</div>
